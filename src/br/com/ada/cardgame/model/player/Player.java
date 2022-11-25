@@ -8,10 +8,10 @@ public class Player {
     private Integer life;
     private FieldSide fieldSide;
 
-    public Player(Deck deck, Integer life, FieldSide fieldSide) {
+    public Player(Deck deck, Integer life) {
         this.deck = deck;
         this.life = life;
-        this.fieldSide = fieldSide;
+        this.fieldSide = new FieldSide();
     }
 
     public Deck getDeck() {

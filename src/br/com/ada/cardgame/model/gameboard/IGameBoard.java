@@ -7,6 +7,5 @@ import br.com.ada.cardgame.model.Deck;
 public interface IGameBoard {
     void addDeck(Deck deck);
     Boolean canCardBePlayed(Player player, AbstractPlayingCard attackPlayingCard);
-    Boolean isPlayerWinner(Player player);
-
+    Player hasPlayerWinner();
 }

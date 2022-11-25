@@ -1,46 +1,57 @@
 package br.com.ada.cardgame.model.gameboard;
 
+import br.com.ada.cardgame.enumerations.PlayingCardType;
 import br.com.ada.cardgame.model.field.FieldSide;
 import br.com.ada.cardgame.model.Deck;
-import br.com.ada.cardgame.model.field.PartyFieldSide;
 import br.com.ada.cardgame.model.player.Player;
 import br.com.ada.cardgame.model.playingcards.AbstractPlayingCard;
 
 import java.util.List;
 
 public class VersusGameBoard extends AbstractGameBoard {
-//    private final Integer DEFAULT_NUMBER_OF_DECKS = 2;
-//    private final Integer DEFAULT_DECK_SIZE = 50;
+    private final Integer DEFAULT_NUMBER_OF_DECKS = 2;
+    private final Integer DEFAULT_DECK_SIZE = 50;
+    private final Integer LIFE = 100;
 
-    public VersusGameBoard(List<Deck> decks, List<Player> players, List<FieldSide> campos) {
-        super(2, 50, decks, players, campos);
+    private final Integer attackCardsLimit = 5;
+    private final Integer specialAttackCardsLimit = 2;
+
+    public VersusGameBoard() {
+        super(2, 50);
     }
 
-    void start(List<Deck> decks) {
-        Integer deckSize = super.getDeckSize();
-        if (decks.size() == deckSize) {
-            for (Deck deck : decks) {
-                if (deck.getPlayingCards().size() == deckSize) {
-                    FieldSide fieldSide = new PartyFieldSide(5,2);
-                    Player player = new Player(deck, 10, fieldSide);
-                } else {
-                    throw new IllegalArgumentException();
-                }
-            }
-        } else {
-            throw new IllegalArgumentException();
-        }
+    public VersusGameBoard(Integer numberOfDecks, Integer deckSize) {
+        super(numberOfDecks, deckSize);
+    }
+
+    public Integer getAttackCardsLimit() {
+        return attackCardsLimit;
+    }
+
+    public Integer getSpecialAttackCardsLimit() {
+        return specialAttackCardsLimit;
     }
 
     @Override
     public Boolean canCardBePlayed(Player player, AbstractPlayingCard attackPlayingCard) {
-        return player.getFieldSide().addPlayingCard(attackPlayingCard);
-    }
-
-    @Override
-    // TODO
-    public Boolean isPlayerWinner(Player player) {
-        return null;
+        Boolean result = Boolean.FALSE;
+        final FieldSide fieldSide = player.getFieldSide();
+        if (PlayingCardType.ATTACK.equals(attackPlayingCard.getType())) {
+            List<AbstractPlayingCard> attackPlayingCards =
+                    fieldSide.getAttackPlayingCards();
+            if (attackPlayingCards.size() <= getAttackCardsLimit()) {
+                player.getFieldSide().addPlayingCard(attackPlayingCard);
+                result = Boolean.TRUE;
+            }
+        } else if (PlayingCardType.SPECIAL_ATTACK.equals(attackPlayingCard.getType())) {
+            List<AbstractPlayingCard> specialAttackPlayingCards =
+                    fieldSide.getSpecialAttackPlayingCards();
+            if (specialAttackPlayingCards.size() < getSpecialAttackCardsLimit()) {
+                player.getFieldSide().addPlayingCard(attackPlayingCard);
+                result = Boolean.TRUE;
+            }
+        }
+        return result;
     }
 
 }
