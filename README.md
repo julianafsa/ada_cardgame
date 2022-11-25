@@ -15,11 +15,13 @@ Toda carta tem:
 Um método para ver o nome.
 Um método para ver o tipo.
 Um método para ver o custo.
+
 Carta de Ataque:
 Toda carta de ataque tem:
 
 Um método para ver poder.
 Um método para ver resistência.
+
 Cartas de Ataque Especiais:
 Além de todos os comportamentos da Carta e da Carta de Ataque um método para exibir efeitos.
 
@@ -29,10 +31,12 @@ Todos os tabuleiros tem os métodos:
 De inserir um deck.
 Receber uma carta de ataque e verifica se ela pode ser jogada ou não.
 Retorna se um jogador vence.
+
 Tabuleiro Versus:
 Tem dois decks de 50 cartas e insere os dois ao início do jogo.
 Cabem 5 cartas de ataque e 2 cartas de ataque especiais em cada lado do campo..
 Vence quando a vida do adversário chega a 0.
+
 Tabuleiro Party:
 Tem cinco decks de 80 cartas e insere os cinco ao início do jogo.
 Cabem 34 cartas de ataque no total no campo, somando todos os jogadores.
