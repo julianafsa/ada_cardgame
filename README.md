@@ -1,5 +1,7 @@
 # ada_cardgame
 
+Solução baseada em uma solução em grupo como resultado de uma atividade em sala de aula. Equipe original: Paulo, Johny e Leonardo. Solução em grupo: https://github.com/infinityover/Ada-java
+
 Exercício de Jogo de Cartas
 O intuito do exercício a seguir é treinar e fixar os conceito de interfaces e classes abstratas.
 
